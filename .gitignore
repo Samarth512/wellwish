@@ -31,7 +31,6 @@ migrate_working_dir/
 .pub/
 /build/
 /lib/secrets.dart
-/lib/firebase_options.dart
 /lib/features/ignore/
 # Symbolication related
 app.*.symbols
