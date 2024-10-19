@@ -73,7 +73,7 @@ class _MhpViewState extends State<MhpView> {
                       color: Color.fromRGBO(106, 172, 67, 1)),
                 ),
                 Text(
-                  " Mental Health Professionals",
+                  " Professionals",
                   style: TextStyle(
                       fontWeight: FontWeight.w700,
                       fontFamily: 'Mulish',
