@@ -7,7 +7,7 @@ import 'package:wellwiz/features/reminder/notification_service.dart';
 import 'package:timezone/data/latest_all.dart' as tz;
 import 'package:wellwiz/firebase_options.dart';
 import 'package:workmanager/workmanager.dart';
-import 'package:wellwiz/features/reminder/workmanager_handler.dart'; // Import the new file
+import 'package:wellwiz/features/reminder/workmanager_handler.dart'; 
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
