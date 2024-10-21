@@ -81,18 +81,22 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
 
   // Function to fetch doctors from Firestore
   Future<List<Map<String, dynamic>>> fetchRandomDoctors() async {
-    final QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('doctor').get();
-    List<Map<String, dynamic>> doctors = snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-    
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('doctor').get();
+    List<Map<String, dynamic>> doctors =
+        snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+
     doctors.shuffle(); // Shuffle the list to randomize the doctors
     return doctors.take(3).toList(); // Take only 3 random doctors
   }
 
   // Function to fetch MHPs from Firestore
   Future<List<Map<String, dynamic>>> fetchRandomMHPs() async {
-    final QuerySnapshot snapshot = await FirebaseFirestore.instance.collection('mhp').get();
-    List<Map<String, dynamic>> mhps = snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
-    
+    final QuerySnapshot snapshot =
+        await FirebaseFirestore.instance.collection('mhp').get();
+    List<Map<String, dynamic>> mhps =
+        snapshot.docs.map((doc) => doc.data() as Map<String, dynamic>).toList();
+
     mhps.shuffle(); // Shuffle the list to randomize the MHPs
     return mhps.take(3).toList(); // Take only 3 random MHPs
   }
@@ -451,7 +455,7 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
   // Function to display section title
   Widget sectionTitle(String title) {
     return Padding(
-      padding: EdgeInsets.only(left: 20, right: 20, top: 20),
+      padding: EdgeInsets.only(left: 20, right: 20, top: 10, bottom: 10),
       child: Text(
         title,
         style: TextStyle(
@@ -464,84 +468,84 @@ class _DiagnosisPageState extends State<DiagnosisPage> {
   }
 
   // Function to build a horizontal list view for doctors and MHPs
-Widget horizontalListView(List<Map<String, dynamic>> items, String type, VoidCallback onArrowTap) {
-  return Container(
-    height: 100,
-    margin: EdgeInsets.only(left: 20),
-    child: ListView.builder(
-      scrollDirection: Axis.horizontal,
-      itemCount: items.length + 1, // +1 for the arrow button
-      itemBuilder: (context, index) {
-        if (index < items.length) {
-          final item = items[index];
-          return GestureDetector(
-            onTap: () {
-              // Navigate to individual doctor's or MHP's page if needed
-            },
-            child: Container(
-              width: 100, // Set a fixed width for uniform tile size
-              padding: EdgeInsets.symmetric(horizontal: 20), // Adjust padding as needed
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              decoration: BoxDecoration(
-                color: Colors.grey.shade300,
-                borderRadius: BorderRadius.circular(10),
+  Widget horizontalListView(
+      List<Map<String, dynamic>> items, String type, VoidCallback onArrowTap) {
+    return Container(
+      height: 120,
+      margin: EdgeInsets.only(right: 20, left: 15),
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: items.length + 1, // +1 for the arrow button
+        itemBuilder: (context, index) {
+          if (index < items.length) {
+            final item = items[index];
+            return GestureDetector(
+              onTap: () {
+                // Navigate to individual doctor's or MHP's page if needed
+              },
+              child: Container(
+                width: 120, // Set a fixed width for uniform tile size
+                padding: EdgeInsets.symmetric(
+                    horizontal: 20), // Adjust padding as needed
+                margin: EdgeInsets.symmetric(horizontal: 5),
+                decoration: BoxDecoration(
+                  color: Colors.grey.shade300,
+                  borderRadius: BorderRadius.circular(10),
+                ),
+                child: Center(
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      CircleAvatar(
+                        backgroundImage: NetworkImage(item['imageUrl']),
+                        radius: 20,
+                      ),
+                      SizedBox(height: 10),
+                      Text(
+                        item['name'],
+                        style: TextStyle(
+                          fontSize: 14,
+                          fontWeight: FontWeight.w600,
+                          fontFamily: 'Mulish',
+                          color: Colors.grey.shade800,
+                        ),
+                        textAlign: TextAlign.center,
+                      ),
+                    ],
+                  ),
+                ),
               ),
-              child: Center(
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    CircleAvatar(
-                      backgroundImage: NetworkImage(item['imageUrl']),
-                      radius: 20,
+            );
+          } else {
+            return GestureDetector(
+              onTap: onArrowTap,
+              child: Container(
+                width: 50, // Keep the arrow button's size separate
+                margin: EdgeInsets.symmetric(horizontal: 5),
+                child: SizedBox(
+                  width: 50,
+                  height: 50,
+                  child: DecoratedBox(
+                    decoration: BoxDecoration(
+                      shape: BoxShape.circle,
+                      color: Colors.grey.shade300,
                     ),
-                    SizedBox(height: 5),
-                    Text(
-                      item['name'],
-                      style: TextStyle(
-                        fontSize: 14,
-                        fontWeight: FontWeight.w600,
-                        fontFamily: 'Mulish',
+                    child: Center(
+                      child: Icon(
+                        Icons.arrow_forward,
+                        size: 24,
                         color: Colors.grey.shade800,
                       ),
-                      textAlign: TextAlign.center,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          );
-        } else {
-          return GestureDetector(
-            onTap: onArrowTap,
-            child: Container(
-              width: 50, // Keep the arrow button's size separate
-              margin: EdgeInsets.symmetric(horizontal: 5),
-              child: SizedBox(
-                width: 50,
-                height: 50,
-                child: DecoratedBox(
-                  decoration: BoxDecoration(
-                    shape: BoxShape.circle,
-                    color: Colors.grey.shade300,
-                  ),
-                  child: Center(
-                    child: Icon(
-                      Icons.arrow_forward,
-                      size: 24,
-                      color: Colors.grey.shade800,
                     ),
                   ),
                 ),
               ),
-            ),
-          );
-        }
-      },
-    ),
-  );
-}
-
-
+            );
+          }
+        },
+      ),
+    );
+  }
 
   Widget _buildTable() {
     if (tableList.isEmpty) {
@@ -665,7 +669,9 @@ Widget horizontalListView(List<Map<String, dynamic>> items, String type, VoidCal
         horizontalListView(randomDoctors, 'doctors', () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => DocView(userId: _auth.currentUser?.uid ?? '')),
+            MaterialPageRoute(
+                builder: (context) =>
+                    DocView(userId: _auth.currentUser?.uid ?? '')),
           );
         }),
         // horizontalListView(
@@ -678,13 +684,15 @@ Widget horizontalListView(List<Map<String, dynamic>> items, String type, VoidCal
         //     Navigator.push(context, MaterialPageRoute(builder: (context) => DocView(userId: _auth.currentUser?.uid ?? '')));
         //   },
         // ),
-        
+
         // MHPs Section
         sectionTitle("Our MHPs"),
         horizontalListView(randomMHPs, 'mhp', () {
           Navigator.push(
             context,
-            MaterialPageRoute(builder: (context) => MhpView(userId: _auth.currentUser?.uid ?? '')),
+            MaterialPageRoute(
+                builder: (context) =>
+                    MhpView(userId: _auth.currentUser?.uid ?? '')),
           );
         }),
         // horizontalListView(

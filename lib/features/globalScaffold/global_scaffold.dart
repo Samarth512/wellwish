@@ -229,7 +229,7 @@ class _GlobalScaffoldState extends State<GlobalScaffold> {
         },
         items: const [
           BottomNavigationBarItem(
-            icon: Icon(Icons.message_rounded),
+            icon: Icon(Icons.home),
             label: 'Home',
           ),
           BottomNavigationBarItem(
