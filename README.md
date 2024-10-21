@@ -43,7 +43,15 @@
 
 ## Screenshots
 
-- ![Home Screen](assets/ScreenShots/home_page.jpg)  ![Mental Peace Page](assets/ScreenShots/mentalPeace_page.jpg) ![Diagnosis Page](assets/ScreenShots/diagnosis_page.jpg) ![Quick Access](assets/ScreenShots/quickAccess_page.jpg) ![Health Tables](assets/ScreenShots/tables.jpg) ![Bookings](assets/ScreenShots/appointments.jpg) ![Reminders](assets/ScreenShots/reminders.jpg)
+<p align="center">
+<img src="assets/ScreenShots/home_page.jpg" width=200 height=457>
+<img src="assets/ScreenShots/mentalPeace_page.jpg" width=200 height=457>
+<img src="assets/ScreenShots/diagnosis_page.jpg" width=200 height=457>
+<img src="assets/ScreenShots/quickAccess_page.jpg" width=200 height=457>
+<img src="assets/ScreenShots/tables.jpg" width=200 height=457>
+<img src="assets/ScreenShots/appointments.jpg" width=200 height=457>
+<img src="assets/ScreenShots/reminders.jpg" width=200 height=457>
+</p>
 
 ## Packages Used
 
