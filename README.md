@@ -1,4 +1,4 @@
-# wellwiz
+# wellwish
 
 A new Flutter project.
 
